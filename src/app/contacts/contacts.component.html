@@ -1,0 +1,60 @@
+<div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+    {{alertText}}
+</div>
+<div *ngIf="showErrorAlert" class="alert alert-danger" role="alert">
+    {{alertText}}
+</div>
+
+<h1 class="display-3"> Contacts</h1>
+<div *ngIf="loading" class="text-center">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+<div class="row">
+    <div *ngIf="showCreate" class="col-md-4 mb-2">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Create new Contact
+                <button (click)="showNewCreateForm()" class="btn btn-sm btn-outline-secondary float-right">
+                    Cancel
+                </button>            
+                <button (click)="delegateFunction()" class="btn btn-sm btn-outline-secondary float-right">
+                    Ok
+                </button>
+            </div>
+            <div class="card-body">
+                <label>Name:</label>
+                <input type="text" [(ngModel)]="contactNameInput" (keyUp.enter)="createContact()"  class="form-control"/>
+                <label>Phone:</label>
+                <input type="text" [(ngModel)]="contactPhoneInput" (keyUp.enter)="createContact()"  class="form-control"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md mb-2" *ngIf="!loading">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-address-card"></i>
+                List of contacts
+                <button class="btn btn-sm btn-outline-secondary float-right" (click)="showNewCreateForm()">
+                    <i class="fa fa-user-plus"></i>
+                    Add Contact
+                </button>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <div *ngIf="contacts.length > 0">
+                        <li *ngFor="let contact of contacts" class="list-group-item">
+                            <app-contact [contact]="contact" (contactDeleted)="delete(contact)" (contactToUpdate)="openEditContact(contact)"></app-contact>                        
+                        </li>
+                    </div>
+                    <div *ngIf="contacts.length == 0">
+                        <li *ngIf="contacts.length == 0" class="list-group-item">
+                            No result was found                
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>    
+</div>

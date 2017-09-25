@@ -1,0 +1,15 @@
+<div>
+    <div>
+        <strong> Name: {{contact.name}} </strong>
+    </div>
+    <div>
+        <strong> Phone: {{contact.phone}} </strong>    
+        
+        <a class="icon float-right" (click)="remove()" data-toggle="tooltip" title="Remove Contact">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        <a class="icon float-right pr-2 pl-2" (click)="edit()" data-toggle="tooltip" title="Edit Contact">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
